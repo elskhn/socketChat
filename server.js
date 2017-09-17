@@ -5,6 +5,8 @@ var app = express();
 var server = require('http').createServer(app);
 //require socket.io and listen to server
 var io = require('socket.io').listen(server);
+// use 'client' folder to GET client-side files
+app.use(express.static('client'));
 
 var users = [];
 var connections = [];
