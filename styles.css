@@ -1,0 +1,61 @@
+body{
+  padding: 30px;
+  background-color: #212121;
+  color: gainsboro;
+  font-family: 'Ubuntu', Trebuchet MS,  sans-serif;
+}
+
+#messageArea{
+  display: none;
+}
+
+#loginArea{
+  text-align: center;
+}
+
+textarea.login{
+  resize:none;
+}
+
+.list-group-item{
+  color: black;
+  background-color: #368bd6;
+  border-radius: 10px;
+  border-color: gainsboro;
+}
+
+.well{
+  background-color: rgba(50, 50, 50, 0.84);
+  color: gainsboro;
+}
+
+.btn-primary{
+  color: #368bd6;
+  background-color: rgb(57, 57, 57);
+  border-color: #285e8e;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active{
+  background-color: rgb(46, 45, 45);
+}
+
+.textinput{
+  background-color: rgb(60, 60, 60);
+  border-radius: 10px;
+  border-color: gainsboro;
+  color: gainsboro;
+  margin: 10px;
+}
+.textinput::-webkit-input-placeholder {
+  color: gainsboro !important;
+}
+.textinput:-moz-placeholder { /* Firefox 18- */
+  color: gainsboro !important;
+}
+.textinput::-moz-placeholder {  /* Firefox 19+ */
+  color: gainsboro !important;
+}
+.textinput:-ms-input-placeholder {
+  color: gainsboro !important;
+}
