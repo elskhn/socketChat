@@ -1,4 +1,8 @@
+html{
+  height: 100vh;
+}
 body{
+  height: 100vh;
   padding: 30px;
   background-color: #212121;
   color: gainsboro;
@@ -10,7 +14,16 @@ body{
 }
 
 #loginArea{
+  margin-top: 38vh;
+  transition: 0.5s;
   text-align: center;
+}
+
+.form-group{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 textarea.login{
@@ -20,13 +33,14 @@ textarea.login{
 .list-group-item{
   color: black;
   background-color: #368bd6;
-  border-radius: 10px;
+  border-radius: 2em;
   border-color: gainsboro;
 }
 
 .well{
   background-color: rgba(50, 50, 50, 0.84);
   color: gainsboro;
+  border-radius: 4em;
 }
 
 .btn-primary{
@@ -45,7 +59,7 @@ textarea.login{
   border-radius: 10px;
   border-color: gainsboro;
   color: gainsboro;
-  margin: 10px;
+  margin: 11px 0px 1px 0px;
 }
 .textinput::-webkit-input-placeholder {
   color: gainsboro !important;

@@ -1,2 +1,5 @@
-# ignore node.js related stuff
+# for node_modules
 node_modules/
+
+# editor config folder
+.c9/
