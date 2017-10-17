@@ -1,133 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Abdullah Khan - Socket Chat</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-      <link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
-      <link rel="stylesheet" href="styles.css">
-   </head>
-   <body>
-      <div class="container">
-         <div class="row" id="loginArea">
-            <div class="col-md-12">
-               <form id="loginForm">
-                  <div class="form-group">
-                     <label>Username:</label>
-                     <!--<textarea class="form-control login" id="username" placeholder="Enter your name here"></textarea>-->
-                     <input type="text" id="username" placeholder="Username here" class="form-control login textinput" autocomplete="off">
-                     <br>
-                     <input type="submit" class="btn btn-primary" value="Enter chat!">
-                  </div>
-               </form>
-            </div>
-         </div>
-         <div id="messageArea" class="row">
-            <div class="col-md-4">
-               <div class="well">
-                  <h3>Online users:</h3>
-                  <ul class="list-group" id="users"></ul>
-               </div>
-            </div>
-            <div class="col-md-8" style="text-align: center;">
-               <div class="chat" id="chat">
-                  <form id="messageForm">
-                     <div class="form-group">
-                        <label>Enter message here</label>
-                        <input type="text" id="message" placeholder="Message" class="form-control textinput" autocomplete="off">
-                        <br>
-                        <input type="submit" class="btn btn-primary" value="Send">
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/aes.min.js"></script>
-      
-      <script type="text/javascript">
-      /* global $, io, Crypt, i*/
-         $(document).ready(function(){
-           var socket = io.connect();
-           //var socket = io.connect('http://khanabdullah.com:8080');
-           //message screen
-           var $messageArea = $('#messageArea');
-           var $messageForm = $('#messageForm');
-           var $message = $('#message');
-           var $users = $('#users');
-           //chat screen
-           var $chat = $('#chat');
-           //login area
-           var $loginForm = $('#loginForm');
-           var $loginArea = $('#loginArea');
-           var $username = $('#username');
-           
-           var passphrase = 'fcf8afd67e96fa3366dd8eafec8bcace',
-               crypter = Crypt(passphrase),
-               id = 0;
-           socket.on('connect', function () {
-               //console.log("connected! Let's start the counter with: " + id);
-               socket.emit('counter', crypter.encrypt({id: id}));
-            });
-            socket.on('counter', function (data) {
-                var decriptedData = crypter.decrypt(data);
-                //console.log("counter status: " + decriptedData.id);
-                socket.emit('counter', crypter.encrypt({id: decriptedData.id}));
-                console.log(socket.username + ": " + crypter.decrypt(data) + " (decrypted)");
-            });
-         
-           $messageForm.submit(function(e){
-             e.preventDefault();
-             if($message.val() != "" && $message.val().length <= 27){
-                socket.emit('sendMsg', $message.val());
-                $message.val('');
-             }
-             else{
-                 alert("Please, enter a valid message. The character limit for each message is 27.");
-             }
-           });
-         
-           socket.on('newMsg', function(data) {
-             $chat.append('<div class="well"><strong>'+data.user+': </strong>'+data.msg+' </div>');
-           });
-         
-           $loginForm.submit(function(e){
-             e.preventDefault();
-             if($username.val() != ""){
-                 socket.emit('newUser', $username.val(), function(data){
-                   if(data){
-                     $loginForm.hide();
-                     $messageArea.show();
-                     $loginArea.hide();
-                   }
-                 });
-            }
-            else{
-                alert("Please enter an actual username. Remember, everyone will see this name.");
-            }
-            $username.val('');
-            });
-         
-           socket.on('getUsers', function(data) {
-             var html = '';
-         
-             for(i = 0; i < data.length; i++){
-               html += '<li class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> '+data[i]+' </li>';
-             }
-         
-             $users.html(html);
-           });
-         
-         });
-      </script>
-      <script src="/Crypt.js"></script>
-   </body>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>socketChat</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row" id="loginArea">
+			<div class="col-md-12">
+				<form id="loginForm">
+					<div class="form-group">
+						<label>Username:</label>
+						<!--<textarea class="form-control login" id="username" placeholder="Enter your name here"></textarea>-->
+						<input type="text" id="username" placeholder="Username here" class="form-control login textinput" autocomplete="off">
+						<br>
+						<input type="submit" class="btn btn-primary" value="Enter chat!">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="messageArea" class="row">
+			<div class="col-md-4">
+				<div class="well">
+					<h3>Online users:</h3>
+					<ul class="list-group" id="users"></ul>
+				</div>
+			</div>
+			<div class="col-md-8" style="text-align: center;">
+				<div class="chat" id="chat">
+					<form id="messageForm">
+						<div class="form-group">
+							<label>Enter message here</label>
+							<input type="text" id="message" placeholder="Message" class="form-control textinput" autocomplete="off">
+							<br>
+							<input type="submit" class="btn btn-primary" value="Send">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/aes.min.js"></script>
+
+	<script type="text/javascript">
+		/* global $, io, Crypt, i*/
+		$(document).ready(function () {
+			var socket = io.connect();
+			//var socket = io.connect('http://khanabdullah.com:8080');
+			//message screen
+			var $messageArea = $('#messageArea');
+			var $messageForm = $('#messageForm');
+			var $message = $('#message');
+			var $users = $('#users');
+			//chat screen
+			var $chat = $('#chat');
+			//login area
+			var $loginForm = $('#loginForm');
+			var $loginArea = $('#loginArea');
+			var $username = $('#username');
+
+			var passphrase = 'fcf8afd67e96fa3366dd8eafec8bcace',
+				crypter = Crypt(passphrase),
+				id = 0;
+			socket.on('connect', function () {
+				//console.log("connected! Let's start the counter with: " + id);
+				socket.emit('counter', crypter.encrypt({
+					id: id
+				}));
+			});
+			socket.on('counter', function (data) {
+				var decriptedData = crypter.decrypt(data);
+				//console.log("counter status: " + decriptedData.id);
+				socket.emit('counter', crypter.encrypt({
+					id: decriptedData.id
+				}));
+				console.log(socket.username + ": " + crypter.decrypt(data) + " (decrypted)");
+			});
+
+			$messageForm.submit(function (e) {
+				e.preventDefault();
+				if ($message.val() != "" && $message.val().length <= 27) {
+					socket.emit('sendMsg', $message.val());
+					$message.val('');
+				} else {
+					alert("Please enter a valid message. The character limit for each message is 27.");
+				}
+			});
+
+			socket.on('newMsg', function (data) {
+				$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + ' </div>');
+			});
+
+			$loginForm.submit(function (e) {
+				e.preventDefault();
+				if ($username.val() != "") {
+					socket.emit('newUser', $username.val(), function (data) {
+						if (data) {
+							$loginForm.hide();
+							$messageArea.show();
+							$loginArea.hide();
+						}
+					});
+				} else {
+					alert("Please enter an actual username. Remember, everyone will see this name.");
+				}
+				$username.val('');
+			});
+
+			socket.on('getUsers', function (data) {
+				var html = '';
+
+				for (i = 0; i < data.length; i++) {
+					html += '<li class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> ' + data[i] + ' </li>';
+				}
+
+				$users.html(html);
+			});
+
+		});
+	</script>
+	<script src="/Crypt.js"></script>
+</body>
+
 </html>
