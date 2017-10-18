@@ -38,15 +38,19 @@
 				</div>
 			</div>
 			<div class="col-md-8" style="text-align: center;">
-				<div class="chat" id="chat">
+				<div class="chat">
 					<form id="messageForm">
 						<div class="form-group">
 							<label>Enter message here</label>
-							<input type="text" id="message" placeholder="Message" class="form-control textinput" autocomplete="off">
-							<br>
-							<input type="submit" class="btn btn-primary" value="Send">
+							<div class="input-group">
+								<input type="text" id="message" placeholder="Message" class="form-control textinput" autocomplete="off">
+								<input type="submit" class="btn btn-primary send-button" value="">
+							</div>
 						</div>
 					</form>
+					<div  id="chat">
+						
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,7 +91,7 @@
 				socket.emit('counter', crypter.encrypt({
 					id: decriptedData.id
 				}));
-				console.log(socket.username + ": " + crypter.decrypt(data) + " (decrypted)");
+				//console.log(socket.username + ": " + crypter.decrypt(data) + " (decrypted)");
 			});
 
 			$messageForm.submit(function (e) {
@@ -101,7 +105,7 @@
 			});
 
 			socket.on('newMsg', function (data) {
-				$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + ' </div>');
+				$chat.append('<div class="well message"><strong>' + data.user + ': </strong>' + data.msg + ' </div>');
 			});
 
 			$loginForm.submit(function (e) {
