@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>socketChat</title>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+	<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	<div class="container" id="login-container">
+		<div class="row fadeIn" id="loginArea">
+			<div class="col-md-12" id="login-column">
+				<form id="loginForm">
+					<div class="form-group" id="login-form-width">
+						<!--<textarea class="form-control login" id="username" placeholder="Enter your name here"></textarea>-->
+						<input type="text" id="username" placeholder="Your username here" class="form-control login textinput" autocomplete="off">
+						<br>
+						<input type="submit" class="btn btn-primary" id="login-button" value="Enter chat!">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="messageArea" class="row">
+			<div class="col-md-4">
+				<div class="well">
+					<h3>Online users:</h3>
+					<ul class="list-group" id="users"></ul>
+				</div>
+			</div>
+			<div class="col-md-8" style="text-align: center;">
+				<div class="chat">
+					<form id="messageForm">
+						<div class="form-group">
+							<label>Enter message here</label>
+							<div class="input-group">
+								<input type="text" id="message" placeholder="Type here!" tab-index="1" class="form-control textinput" autocomplete="off">
+								<input type="submit" class="btn btn-primary send-button" value="">
+							</div>
+						</div>
+					</form>
+					<div  id="chat">
+						<!-- the individual messages get appended here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/aes.min.js"></script>
+
+	<script src="/js/client.js"></script>
+	<script src="/js/Crypt.js"></script>
+</body>
+
+</html>
