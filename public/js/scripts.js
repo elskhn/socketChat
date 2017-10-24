@@ -56,7 +56,7 @@ $(document).ready(function () {
 					$loginArea.fadeOut("slow");
 					setTimeout(() => {
 						$messageArea.fadeIn("slow");
-					}, 1400);
+					}, 600);
 				}
 			});
 		} else {

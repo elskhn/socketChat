@@ -12,6 +12,11 @@ body {
     font-smooth: always;
     letter-spacing: 0.6px;
 }
+
+::selection{
+    background: #efefef;
+    color: #313131;
+}
 #messageArea {
     display: none;
 }
@@ -167,6 +172,15 @@ textarea.login {
 
 #login-form-width{
     min-width: 25vw;
+}
+
+#chat-card{
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 19px;
+    min-width: 55vw;
+    background: #797979;
+    border-radius: 17px;
 }
 
 #username{ 
