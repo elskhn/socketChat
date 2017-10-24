@@ -4,15 +4,19 @@ html {
 body {
     height: 100vh;
     padding: 30px;
-    background-color: #060606;
+    background-color: #0c0c0c;
     color: gainsboro;
     font-family: 'Ubuntu', Trebuchet MS, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    font-smooth: always;
+    letter-spacing: 0.6px;
 }
 #messageArea {
     display: none;
 }
 #loginArea {
-    margin-top: 38vh;
+    margin-top: 30vh;
     transition: 0.5s;
     text-align: center;
 }
@@ -140,10 +144,21 @@ textarea.login {
     animation: fadein 2s;
 }
 
+#intro-container{
+    justify-content: center;
+    display: flex;
+}
+
+#intro{
+    text-align: center;
+    font-weight: 700;
+}
+
 #login-container{
     align-items: center;
     justify-content: center;
     display: flex;
+    flex-direction: column;
 }
 
 #login-column{
@@ -154,7 +169,7 @@ textarea.login {
     min-width: 25vw;
 }
 
-#username{
+#username{ 
     border: none;
     transition: 0.4s;
     background: rgba(255, 255, 255, 0.03);
@@ -164,10 +179,28 @@ textarea.login {
 }
 
 #username:focus{
-    background: rgb(27, 27, 27);
-    transform: scale(1.03);
+    background: rgb(35, 35, 35);
+   /* transform: scale(1.02);*/
 }
 
 .form-control:focus{
     box-shadow: none;
+}
+
+#login-button{
+    transition: 0.4s;
+    color: #dcdcdc;
+    padding: 3px 9px;
+    border: 2px solid #dcdcdc;
+    border-radius: 3px;
+    background: rgb(14, 14, 14);
+}
+
+#login-button:hover{
+    background: rgb(41, 41, 41);
+}
+
+#login-button:active{
+    transform: scale(0.98);
+    outline: none;
 }

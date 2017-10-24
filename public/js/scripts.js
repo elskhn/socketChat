@@ -51,9 +51,12 @@ $(document).ready(function () {
 		if ($username.val() != "") {
 			socket.emit('newUser', $username.val(), function (data) {
 				if (data) {
-					$loginForm.hide();
-					$messageArea.show();
-					$loginArea.hide();
+					$loginForm.fadeOut("slow");
+					$('#intro-container').fadeOut("slow");
+					$loginArea.fadeOut("slow");
+					setTimeout(() => {
+						$messageArea.fadeIn("slow");
+					}, 1400);
 				}
 			});
 		} else {
@@ -68,8 +71,8 @@ $(document).ready(function () {
 
 		for (i = 0; i < data.length; i++) {
 		    //let id = i + 1;
-			html += '<li id="' + id + '" class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> ' + data[i] + (id == 1 ? "   (you)" : "") + ' </li>';
-			html += '<li id="' + id + '" class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> ' + data[i] + (id == 1 ? "   (you)" : "") + ' </li>';
+			html += '<li id="' + id + '" class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> ' + data[i] + ' </li>';
+			//html += '<li id="' + id + '" class="list-group-item"><i class="fa fa-circle" style="color: #40f23a;"></i> ' + data[i] + (id == 1 ? "   (you)" : "") + ' </li>';
 		}
         // console.log(data[0]);
 		$users.html(html);
