@@ -11,7 +11,7 @@ var Crypt = require("g-crypt"),
     crypter = Crypt(passphrase);
 
 // use 'client' folder to GET client-side files
-app.use(express.static('client'));
+app.use(express.static('public'));
 
 var users = [];
 var connections = [];
