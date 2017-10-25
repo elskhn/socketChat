@@ -97,8 +97,34 @@ textarea.login {
 
 }
 
+.mine{
+    max-width: 50%;
+    /* light-blue (with reduced opacity) */
+    background: rgba(54, 139, 214, 0.46);
+    float: right;
+}
+
+.not-mine{
+    float: left;
+    background: rgba(136, 136, 136, 0.58);
+}
+
+.message{
+    border-color: transparent;
+    border-radius: 25px;
+    padding: 14px;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
 .message:last-of-type{
     margin-bottom: 0;
+}
+
+.chat-line-break{
+    clear: both;
 }
 @keyframes fadein {
     from {
@@ -159,7 +185,7 @@ textarea.login {
     font-weight: 700;
 }
 
-#login-container{
+#main-container{
     align-items: center;
     justify-content: center;
     display: flex;
@@ -179,8 +205,9 @@ textarea.login {
     flex-direction: column-reverse;
     padding: 19px;
     min-width: 55vw;
-    background: #797979;
-    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 26px;
+    position: relative;
 }
 
 #username{ 
@@ -217,4 +244,9 @@ textarea.login {
 #login-button:active{
     transform: scale(0.98);
     outline: none;
+}
+
+#messageForm{
+    position: absolute;
+    bottom: 0;
 }
