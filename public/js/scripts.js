@@ -42,13 +42,10 @@ $(document).ready(function () {
 		}
 	});
 
-	socket.on('newMsg', function (data) {
-		$chat.append('<div class="well message"><strong>' + data.user + ': </strong>' + data.msg + ' </div>');
-	});
-
 	$loginForm.submit(function (e) {
 		e.preventDefault();
 		if ($username.val() != "") {
+			window.sessionUser = $username.val();
 			socket.emit('newUser', $username.val(), function (data) {
 				if (data) {
 					$loginForm.fadeOut("slow");
@@ -63,6 +60,14 @@ $(document).ready(function () {
 			alert("Please enter an actual username. Remember, everyone will see this name.");
 		}
 		$username.val('');
+	});
+	
+	// when a new message is transmitted from the server
+	socket.on('newMsg', function (data) {
+		// check if the user sending the message is this sessions' user or someone else...
+		$chat.append('<div class="well message '+ (window.sessionUser == data.user ? "mine" : "not-mine" ) +'"><strong>' + data.user + ': </strong>' + data.msg + ' </div>');
+		// add a line break after every message for aesthetic purposes
+		$chat.append('<br class="chat-line-break">');
 	});
 
 	socket.on('getUsers', function (data) {
