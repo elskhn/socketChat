@@ -29,6 +29,7 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    margin-bottom: 0;
 }
 textarea.login {
     resize: none;
@@ -100,13 +101,13 @@ textarea.login {
 .mine{
     max-width: 50%;
     /* light-blue (with reduced opacity) */
-    background: rgba(54, 139, 214, 0.46);
+    background: rgba(45, 145, 232, 0.78);
     float: right;
 }
 
 .not-mine{
     float: left;
-    background: rgba(136, 136, 136, 0.58);
+    background: rgba(99, 99, 99, 0.94);
 }
 
 .message{
@@ -201,13 +202,15 @@ textarea.login {
 }
 
 #chat-card{
+    max-height: 94vh;
     display: flex;
     flex-direction: column-reverse;
     padding: 19px;
-    min-width: 55vw;
-    background: rgba(255, 255, 255, 0.22);
+    min-width: 65vw;
+    background: rgba(255, 255, 255, 0.68);
     border-radius: 26px;
     position: relative;
+    overflow-y: scroll;
 }
 
 #username{ 

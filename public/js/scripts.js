@@ -32,9 +32,9 @@ $(document).ready(function () {
 		//console.log(socket.username + ": " + crypter.decrypt(data) + " (decrypted)");
 	});
 
-	$messageForm.submit(function (e) {
+	$messageForm.on("submit", function (e) {
 		e.preventDefault();
-		if ($message.val() != "" && $message.val().length <= 27) {
+		if ($message.val().trim() != "" && $message.val().length <= 27) {
 			socket.emit('sendMsg', $message.val());
 			$message.val('');
 		} else {
@@ -42,7 +42,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$loginForm.submit(function (e) {
+	$loginForm.on("submit", function (e) {
 		e.preventDefault();
 		if ($username.val() != "") {
 			window.sessionUser = $username.val();
