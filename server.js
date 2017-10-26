@@ -28,7 +28,7 @@ io.sockets.on('connection', function(socket) {
     console.log('New connection detected! (Total connections: %s)', connections.length);
     socket.on('counter', function(data) {
         var decriptedData = crypter.decrypt(data);
-        //prints sent/recieved encryptred messages in console
+        // prints sent/recieved encryptred messages in server log for demo purposes
         //console.log(socket.username + ": " + data);
         setTimeout(function() {
             //console.log("counter status: " + decriptedData.id);
@@ -59,10 +59,12 @@ io.sockets.on('connection', function(socket) {
 
     //new user
     socket.on('newUser', function(data, callback) {
-        callback(true);
-        socket.username = data;
-        users.push(socket.username);
-        updateUserNames();
+        if(data.length <= 8){
+            callback(true);
+            socket.username = data;
+            users.push(socket.username);
+            updateUserNames();
+        }
     });
 
     //update user names function
