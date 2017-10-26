@@ -13,15 +13,19 @@ body {
     letter-spacing: 0.6px;
 }
 
+.hide{
+    display: none;
+}
 ::selection{
     background: #efefef;
     color: #313131;
 }
 #messageArea {
+    /*margin-top: 4vw;*/
     display: none;
 }
 #loginArea {
-    margin-top: 30vh;
+    margin-top: 28vh;
     transition: 0.5s;
     text-align: center;
 }
@@ -98,8 +102,12 @@ textarea.login {
 
 }
 
+#empty-chat-text{
+    color: #3a3a3a;
+    margin: 0;
+}
 .mine{
-    max-width: 50%;
+    max-width: 52%;
     /* light-blue (with reduced opacity) */
     background: rgba(45, 145, 232, 0.78);
     float: right;
@@ -119,6 +127,7 @@ textarea.login {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    max-width: 52%;
 }
 .message:last-of-type{
     margin-bottom: 0;
@@ -188,6 +197,7 @@ textarea.login {
 
 #main-container{
     align-items: center;
+    margin-top: 3vw;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -202,15 +212,29 @@ textarea.login {
 }
 
 #chat-card{
-    max-height: 94vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column-reverse;
     padding: 19px;
-    min-width: 65vw;
+    min-width: 70vw;
+    max-width: 71vw;
     background: rgba(255, 255, 255, 0.68);
-    border-radius: 26px;
+    border-radius: 4% 1% 1% 4%;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+@media(max-width: 460px){
+    #chat-card{
+        max-height: 75vh;
+        margin-top: 4vh;
+        min-width: 91vw;
+        max-width: 90vw;
+    }
+    #messageForm{
+        min-width: 90vw;
+    }
+
 }
 
 #username{ 
@@ -250,6 +274,29 @@ textarea.login {
 }
 
 #messageForm{
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    align-self: center;
+    bottom: 1.5vh;
+}
+
+#chat-card::-webkit-scrollbar {
+    width: 7px;
+}
+
+#chat-card::-webkit-scrollbar-track {
+    background: #b1b1b1;
+}
+
+#chat-card::-webkit-scrollbar-thumb {
+    background: #528bbd; 
+    border-radius: 21px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+    padding: 0;
+}
+
+.row{
+    padding: 0;
 }
