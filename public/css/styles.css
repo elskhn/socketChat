@@ -34,6 +34,15 @@ body {
 	text-align: center;
 }
 
+/* TODO: add footer styling */
+
+footer{
+	margin: 2vw;
+}
+
+#footer-content{
+}
+
 .form-group {
 	justify-content: center;
 	align-items: flex-start;
@@ -73,14 +82,19 @@ textarea.login {
 	background-image: url(../send.svg);
 }
 
+.send-button:hover{
+	background-color: rgb(39, 38, 38);
+	border: 3px solid #b1b1b1;
+}
+
 .btn-primary:active, .btn-primary:focus {
 	border-color: #368bd6;
 }
 
 .textinput {
 	background-color: rgb(86, 86, 86);
-	border-radius: 10px;
-	border-color: #368bd6;
+	border-radius: 4px;
+	border: 3px solid #b1b1b1;
 	color: gainsboro;
 	/* margin: 11px 0px 1px 0px;*/
 }
@@ -109,19 +123,22 @@ textarea.login {
 .send-button {
 	transition: 0.3s;
 	border-left: none !important;
-	border-radius: 0px 10px 10px 0px !important;
-	height: 100% !important;
-	min-width: 11%;
+	border-radius: 0px 1px 1px 0px !important;
+	/*height: 100% !important;*/
+	height: 45px;
+	min-width: 13%;
 	background-image: url(../send.svg);
-	background-size: 55%;
+	background-size: 25px;
 	background-repeat: no-repeat;
 	background-position-x: center;
 	background-position-y: center;
+	border: 3px solid #b1b1b1;
 }
 
 #empty-chat-text {
 	color: #3a3a3a;
 	margin: 0;
+	font-size: 133%;
 }
 
 .mine {
@@ -301,6 +318,8 @@ textarea.login {
 	bottom: 0;
 	align-self: center;
 	bottom: 1.5vh;
+	min-width: 100vw;
+	max-width: 101vw;
 }
 
 #chat-card::-webkit-scrollbar {
@@ -322,4 +341,8 @@ textarea.login {
 
 .row {
 	padding: 0;
+}
+
+#message{
+	height: 45px;
 }
