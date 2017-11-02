@@ -3,3 +3,6 @@ node_modules/
 
 # editor config folder
 .c9/
+
+# javascript linter config
+.jshintrc
