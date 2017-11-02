@@ -5,7 +5,11 @@ socketChat was built with [Node.js](https://nodejs.org/en/), using [Socket.io](h
 
 ___
 ## Demo:
-_demo image to be added soon..._
+##### Login demo:
+![login screen demo](demo_login.png)
+
+##### Chat demo:
+![chat screen demo](demo_chat.png)
 
 ## Running
 If you'd like to run this app:
