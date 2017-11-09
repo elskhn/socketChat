@@ -24,7 +24,6 @@ body {
 }
 
 #messageArea {
-	/*margin-top: 4vw;*/
 	display: none;
 }
 
@@ -34,18 +33,34 @@ body {
 	text-align: center;
 }
 
-/* TODO: add footer styling */
-
-#footer{
-	position: absolute;
-	
-	margin: 3vw;
-	max-width: 45vw;
-	bottom: 4%;
+#footer {
+  position: fixed;
+  left: 3%;
+  bottom: 3.3%;
 }
 
-#footer-content{
+#footer-content {
+  width: 100%;
 }
+
+#footer-logo {
+  width: 80px;
+  transition: 0.3s;
+}
+@media (max-width: 420px) {
+  #footer-logo {
+    width: 45px;
+  }
+}
+@media (max-width: 300px) {
+  #footer-logo {
+    width: 35px;
+  }
+}
+#footer-logo:hover {
+  transform: scale(1.1);
+}
+
 
 .form-group {
 	justify-content: center;
@@ -68,7 +83,6 @@ textarea.login {
 .well {
 	background-color: rgba(50, 50, 50, 0.84);
 	color: gainsboro;
-	/* border-radius: 4em;*/
 }
 
 .btn-primary {
@@ -100,7 +114,6 @@ textarea.login {
 	border-radius: 4px;
 	border: 3px solid #b1b1b1;
 	color: gainsboro;
-	/* margin: 11px 0px 1px 0px;*/
 }
 
 .textinput::-webkit-input-placeholder {
@@ -128,7 +141,6 @@ textarea.login {
 	transition: 0.3s;
 	border-left: none !important;
 	border-radius: 0px 1px 1px 0px !important;
-	/*height: 100% !important;*/
 	height: 45px;
 	min-width: 13%;
 	background-image: url(../send.svg);
@@ -280,7 +292,6 @@ textarea.login {
 
 #username:focus {
 	background: rgb(35, 35, 35);
-	/* transform: scale(1.02);*/
 }
 
 .form-control:focus {

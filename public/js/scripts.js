@@ -50,6 +50,7 @@ $(document).ready(() => {
 					$loginForm.fadeOut("slow");
 					$('#intro-container').fadeOut("slow");
 					$loginArea.fadeOut("slow");
+					$("#footer").fadeOut("slow");
 					setTimeout(() => {
 						$messageArea.fadeIn("slow");
 					}, 600);
