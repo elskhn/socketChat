@@ -10,6 +10,7 @@
   "author": "Abdullah Khan",
   "license": "GPL-3.0",
   "dependencies": {
+    "compression": "^1.7.1",
     "express": "^4.16.2",
     "socket.io": "^2.0.4"
   }

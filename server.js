@@ -1,6 +1,7 @@
 //require express and make an express application
-const express = require('express');
-var app = express();
+const express = require('express'),
+      compression = require('compression');
+let app = express();
 
 const server = require('http').createServer(app);
 //require socket.io and listen to server
@@ -10,8 +11,13 @@ let Crypt = require("g-crypt"),
     passphrase = 'fcf8afd67e96fa3366dd8eafec8bcace',
     crypter = Crypt(passphrase);
 
-// use 'client' folder to GET client-side files
-app.use(express.static('public'));
+// one month cache period for static files
+let cacheTime = 30 * 24 * 60 * 60 * 1000;
+
+// compress all app responses
+app.use(compression());
+// use the 'public' directory to serve static files (and set cache time)
+app.use(express.static(__dirname + '/public', {maxAge: cacheTime}));
 
 let users = [];
 let connections = [];
