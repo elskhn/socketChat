@@ -1,4 +1,6 @@
 # socketChat
+
+### _Redesign in progress_
 A simple, real-time, and secure messaging application.
 
 socketChat was built with [Node.js](https://nodejs.org/en/), using [Socket.io](https://socket.io).
