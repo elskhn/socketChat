@@ -20,10 +20,12 @@ block content
         input(type="button", value="Join everyone!")
   .container-right
     form.room-form(action="submit")
+        label Join a private room #[span 🔒]
         input(type="text" placeholder="Username")
         input(type="text" placeholder="Room code")
         input(type="button", value="Join room")
     form.create-form(action="submit")
+        label Create a secret room #[span 🙈]
         input(type="text" placeholder="Username")
         input(type="button", value="Create room")
     footer.footer
