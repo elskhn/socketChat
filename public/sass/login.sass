@@ -26,6 +26,16 @@
   flex-direction: column
   justify-content: center
 
+.container-right
+  display: flex
+  height: 100%
+  width: 50vw
+  overflow: hidden
+  color: white
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
 .title
   margin: 40px 0 0 40px
   @media(max-width: 1079px)
@@ -43,21 +53,48 @@
     > br
       display: inline
 
-.login-form
-  z-index: 5
+form
   margin: 50px
   display: flex
   flex-direction: column
-  width: 50%
   align-items: center
-  align-self: center
   justify-content: center
+  z-index: 3
   > input[type = "text"]
     background: rgba(255,255,255, 0.2)
     border: 2px solid rgba(255,255,255, 0.6)
+    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.3)
+    transition: 0.1s
     padding: 10px
     color: white
     border-radius: 5px
     margin: 10px
+    &:focus
+      background: rgba(255,255,255, 0.3)
   > input[type = "button"]
-    width: 50%
+    padding: 10px 15px 10px 15px
+    margin: 5px
+    border: none
+    border-radius: 15px
+    transition: 0.1s
+    color: white
+    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.3)
+    &:hover
+      cursor: pointer
+      transform: scale(1.08)
+    &:focus
+      transform: scale(1.08)
+    &:active
+      opacity: 0.8
+
+.room-form
+  > input[type = "button"]
+    background: linear-gradient(to bottom right, #31ACCE, #414C96)
+
+.create-form
+  > input[type = "button"]
+    background: linear-gradient(to bottom right, #5BBF71, #2B7B40)
+
+.login-form
+  > input[type = "button"]
+    background: linear-gradient(to bottom right, #9562E1, #6735B1)

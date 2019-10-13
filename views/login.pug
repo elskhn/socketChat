@@ -2,6 +2,8 @@ extends layout
 append head
   link(rel="stylesheet", href="/css/login.css")
 
+//- https://stackoverflow.com/questions/2004315/populate-1-form-field-based-on-another
+
 block content
   .bg-left
     #particles
@@ -14,9 +16,22 @@ block content
         br
         | or #[strong create] your own!
       form.login-form(action="submit")
-        input(type="text")
+        input(type="text" placeholder="Username")
         input(type="button", value="Join everyone!")
-
+  .container-right
+    form.room-form(action="submit")
+        input(type="text" placeholder="Username")
+        input(type="text" placeholder="Room code")
+        input(type="button", value="Join room")
+    form.create-form(action="submit")
+        input(type="text" placeholder="Username")
+        input(type="button", value="Create room")
+    footer.footer
+      a(href="https://khanabdullah.com")
+        img(src="/img/logo.jpg" alt="Abdullah's logo")
+      a(href="https://github.com/abdullah-k/socketChat" target="_blank")
+        p #{'</>'}
+  
 block scripts
   script(src="/lib/particles.min.js")
   script(src="/js/login.js")

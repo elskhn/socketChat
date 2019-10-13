@@ -27,6 +27,7 @@ html, body
   color: white
   font-family: "Ubuntu", sans-serif
   overflow: hidden
+  display: flex
 
 .title-size
   +responsive-font(3vw, 27px, 42px)
@@ -35,3 +36,24 @@ html, body
 .secondary-size
   +responsive-font(2vw, 16px, 24px)
   transition: 0.2s
+
+.footer
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  > a
+    text-decoration: none
+  > a > img
+    width: 70px
+    border-radius: 15px
+    margin: 40px
+  > a > p
+    color: white
+    margin: 40px
+    font-size: 22px
+    font-family: monospace
