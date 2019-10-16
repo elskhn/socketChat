@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/abdullah-k/socketChat#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "g-crypt": "^1.1.0",
     "pug": "^2.0.4",
     "socket.io": "^2.2.0"
