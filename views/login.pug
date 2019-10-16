@@ -13,18 +13,18 @@ block content
         | #[strong Join] the global room, 
         | join a room using a code, 
         | or #[strong create] your own!
-      form.login-form
-        input.usernameInput(type="text" name="username" placeholder="Username" method="POST" autocomplete="off")
+      form.login-form(method="post" action="/")
+        input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
         button(type="submit") Join everyone!
   .container-right
-    form.room-form
+    form.room-form(method="post" action="/room/")
       label Join a private room #[span 🔒]
-      input.usernameInput(type="text" name="username" placeholder="Username" method="POST" autocomplete="off")
+      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
       input(type="text" name="roomCode" placeholder="Room code")
       button(type="submit") Join room
-    form.create-form
+    form.create-form(method="post" action="/room/")
       label Create a secret room #[span 🙈]
-      input.usernameInput(type="text" name="username" placeholder="Username" method="POST" autocomplete="off")
+      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
       button(type="submit") Create room
     footer.footer
       a(href="https://khanabdullah.com")
@@ -34,5 +34,4 @@ block content
   
 block scripts
   script(src="/lib/particles.min.js")
-  script(src="/lib/socket.io.js")
   script(src="/js/login.js")
