@@ -18,10 +18,18 @@ app.use(express.static(__dirname + "/public", {maxAge: cacheTime}))
 app.set("view engine", "pug")
 // url encoding
 app.use(express.urlencoded({extended: true}))
+// use environment variable SESSION_SECRET (must be defined when running from command line)
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  authenticated: false
+}))
 
-function checkLoggedIn(req, res, next) {
-  if (req.session == null){
-    res.redirect('/login')
+function checkLoggedIn(request, response, next) {
+  console.log(request.session.authenticated)
+  if (request.session.authenticated == undefined){
+    response.redirect('/login')
   }
   else{
     next()
@@ -29,13 +37,24 @@ function checkLoggedIn(req, res, next) {
 }
 
 // redirect to login if not logged in yet
-app.get('*', (req, res, next) => {
-  if(req.url.indexOf('/login') == -1) {
-    checkLoggedIn(req, res, next)
+app.get('*', (request, response, next) => {
+  if(request.url.indexOf('/login') == -1) {
+    checkLoggedIn(request, response, next)
   }
   else{
     next()
   }
+})
+
+app.get('/logout', function(request, response, next) {
+  request.session.authenticated = false
+  request.session.destroy(function(error) {
+    if(error) {
+      return next(error)
+    } else {
+      return response.redirect('/login')
+    }
+  })
 })
 
 app.use(bodyParser.json())

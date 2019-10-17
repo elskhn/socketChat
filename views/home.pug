@@ -1,7 +1,8 @@
 extend layout
 
 block content
-  h1.title-size socketChat
+  h1.title-size= username
+  a(href="/logout") log out
 
 block scripts
   script(src="/lib/socket.io.js")
