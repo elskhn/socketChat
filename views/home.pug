@@ -1,7 +1,12 @@
 extend layout
 
 block content
-  h1.title-size= username
+  .users-container
+    h1.title-size socketChat
+    - let userWelcome = `Welcome, ${username}`
+    h1= userWelcome
+  .messages-container
+  .input-container
   a(href="/logout") log out
 
 block scripts
