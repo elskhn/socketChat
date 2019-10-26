@@ -19,15 +19,15 @@ app.set("view engine", "pug")
 // url encoding
 app.use(express.urlencoded({extended: true}))
 // use environment variable SESSION_SECRET (must be defined when running from command line)
-app.use(session({
-  secret: process.env.SESSION_SECRET,
+let userSession = (session({
+  secret: process.env.SESSION_SECRET || "thisisatemporarysessionsecret",
   resave: true,
   saveUninitialized: true,
   authenticated: false
 }))
+app.use(userSession)
 
 function checkLoggedIn(request, response, next) {
-  console.log(request.session.authenticated)
   if (request.session.authenticated == undefined){
     response.redirect('/login')
   }
@@ -64,11 +64,23 @@ for (let pages in routes){
   app.use(pages, routes[pages])
 }
 
-// io.sockets.on('connection', socket => {
-//   socket.on('login', data => {
-    
-//   })
-// })
+io.use((socket, next) => {
+  userSession(socket.request, socket.request.res, next)
+})
+
+let users = []
+io.sockets.on('connection', socket => {
+  socket.on('newUser', data => {
+    users.push(socket.request.session.username)
+    io.emit('newUser', {users});
+  })
+  socket.on('disconnect', data => {
+    io.emit("userLeft", data)
+  })
+  socket.on('newMessage', (message) => {
+    io.emit('newMessage', {username: socket.request.session.username,message: message});
+  });
+})
 
 server.listen(4000, () => {
   console.log("server is live on port 4000")
