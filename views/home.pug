@@ -1,13 +1,24 @@
 extend layout
 
+append head
+  link(rel="stylesheet", href="/css/home.css")
+
 block content
-  .users-container
-    h1.title-size socketChat
-    - let userWelcome = `Welcome, ${username}`
-    h1= userWelcome
-  .messages-container
-  .input-container
-  a(href="/logout") log out
+  .inner-container
+    .header
+      h1 socketChat
+      a.logout(href="/logout") Log out
+    //- h1= userWelcome
+    .chat
+      .users-container
+        - let user = `${username} (me)`
+        ul.users-list.card
+          li=user
+          small You're all alone in here #[span 🙁]
+      .chat-container
+        .messages.card
+          p No messages yet. Say something first!
+        .input-container.card
 
 block scripts
   script(src="/lib/socket.io.js")
