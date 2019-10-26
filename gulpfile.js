@@ -6,7 +6,7 @@ const gulp = require('gulp'),
 let styles = () => {
     return gulp.src('public/sass/*.sass')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(prefix())
+        .pipe(prefix('last 2 versions'))
         .pipe(gulp.dest('public/css/'));
 };
 
