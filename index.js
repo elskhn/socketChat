@@ -8,8 +8,8 @@ const server = require("http").createServer(app)
 const io = require('socket.io').listen(server)
 const routes = require("./routes/main")
 
-// one month cache period for static files
-let cacheTime = 30 * 24 * 60 * 60 * 1000
+// two week cache period for static files
+let cacheTime = 14 * 24 * 60 * 60 * 1000
 // compress app responses (before sending to client)
 app.use(compression())
 // use the "public" directory to serve static files (and set cache time)
@@ -68,18 +68,28 @@ io.use((socket, next) => {
   userSession(socket.request, socket.request.res, next)
 })
 
+function removeNulls(array) {
+  return array.filter((element) => {
+    return element != null;
+  })
+}
+
 let users = []
+
 io.sockets.on('connection', socket => {
   socket.on('newUser', data => {
-    users.push(socket.request.session.username)
-    io.emit('newUser', {users});
+    users.push({username: socket.request.session.username, id: socket.id})
+    users = removeNulls(users)
+    io.emit('newUser', users)
   })
-  socket.on('disconnect', data => {
-    io.emit("userLeft", data)
+  socket.on('disconnect', () => {
+    users[users.indexOf(users.find(user => user.id == socket.id))] = null
+    users = removeNulls(users)
+    io.emit("userLeft", users)
   })
   socket.on('newMessage', (message) => {
-    io.emit('newMessage', {username: socket.request.session.username,message: message});
-  });
+    io.emit('newMessage', {username: socket.request.session.username, message: message});
+  })
 })
 
 server.listen(4000, () => {
