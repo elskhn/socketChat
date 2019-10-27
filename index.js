@@ -70,7 +70,7 @@ io.use((socket, next) => {
 
 function removeNulls(array) {
   return array.filter((element) => {
-    return element != null;
+    return element != null
   })
 }
 
@@ -80,15 +80,15 @@ io.sockets.on('connection', socket => {
   socket.on('newUser', data => {
     users.push({username: socket.request.session.username, id: socket.id})
     users = removeNulls(users)
-    io.emit('newUser', users)
+    io.emit('newUser', [users, socket.id])
   })
   socket.on('disconnect', () => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
     users = removeNulls(users)
-    io.emit("userLeft", users)
+    io.emit("userLeft", [users, socket.id])
   })
   socket.on('newMessage', (message) => {
-    io.emit('newMessage', {username: socket.request.session.username, message: message});
+    socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message});
   })
 })
 
