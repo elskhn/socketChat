@@ -57,15 +57,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   messageForm.addEventListener("submit", function (event) {
     event.preventDefault()
-    
+    let error = document.querySelector(".error")
+    error.style.display = "none"
+    let message = messageInput.value.trim()
+    if(message.length > 160) {
+      error.style.display = "block"
+      error.innerHTML = "Your message can't be longer than 160 characters. Sorry!"
+      return;
+    }
+    if(message.length == 0) {
+      error.style.display = "block"
+      error.innerHTML = "You gotta type something first <span class=\"emoji\">😛</span>"
+      return;
+    }
     let text = document.createElement("p")
-    text.innerHTML = messageInput.value.trim()
+    text.innerHTML = message
     text.classList.add("message", "mine")
     chat.appendChild(text)
     chat.scrollTop = chat.scrollHeight
 
     socket.emit("newMessage", messageInput.value.trim())
     messageForm.reset()
+
+    if(document.querySelectorAll(".message").length > 0) {
+      document.querySelector(".alone-notification").style.display = "none"
+    }
   })
   socket.on("newMessage", function(data) {
     // console.log(data.username, data.message)

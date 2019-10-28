@@ -88,7 +88,9 @@ io.sockets.on('connection', socket => {
     io.emit("userLeft", [users, socket.id])
   })
   socket.on('newMessage', (message) => {
-    socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message});
+    if(message.length > 0 && message.length <= 160) {
+      socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message})
+    }
   })
 })
 
