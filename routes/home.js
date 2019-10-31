@@ -17,14 +17,18 @@ router.get("/", (request, response) => {
                       description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan"})
 })
 
+let colors = ["purple", "orange", "green", "blue", "red", "white", "yellow"],
+    counter = 0
+
 router.post("/", (request, response, next) => {
   
   if(isValidUsername(request.body.username)) {
+    counter = counter >= colors.length ? 0 : counter
     request.session.authenticated = true
+    request.session.color = colors[counter]
     request.session.username = request.body.username
-    response.send({redirect: "/"});
-    // response.redirect("/")
-    // console.log("POST-ed", request.body.username);
+    counter++
+    response.send({redirect: "/"})
   }
   else {
     response.status(400)

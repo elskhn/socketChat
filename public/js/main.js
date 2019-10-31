@@ -11,15 +11,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       document.querySelector(".alone-text").style.display = "none"
     }
     userList.innerHTML = ""
+    sessionStorage.setItem("color", data[2])
     users.forEach((user, index) => {
       let li = document.createElement("li")
-      // li.appendChild(document.createTextNode(index == users ? `${user.username} (me)` : user.username))
       li.appendChild(document.createTextNode(user.username))
-      // li.textContent = user.username
-
+      li.classList.add(user.color)
       userList.insertBefore(li, userList.firstChild)
     })
-    // console.log(users)
     
     // send message to others about who connected
     let notification = document.createElement("p")
@@ -29,9 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   })
 
   socket.on("userLeft", function (data) {
-    // let users = data[0]
     userList.innerHTML = ""
-    // console.log(users)
     // send message to others about who disconnected
     let notification = document.createElement("p")
     notification.innerHTML = `${users[users.indexOf(users.find(user => user.id == data[1]))].username} has <span>left</span> the chat.`
@@ -43,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     users = users.filter((element) => {
       return element != null
     })
-    users.forEach(user => {
+    users.forEach((user, index) => {
       let li = document.createElement("li")
       li.appendChild(document.createTextNode(user.username))
+      li.classList.add(user.color)
       userList.insertBefore(li, userList.firstChild)
     })
     if(users.length == 1) {
@@ -70,24 +67,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
       error.innerHTML = "You gotta type something first <span class=\"emoji\">😛</span>"
       return;
     }
-    let text = document.createElement("p")
-    text.innerHTML = message
-    text.classList.add("message", "mine")
-    chat.appendChild(text)
-    chat.scrollTop = chat.scrollHeight
+    // let text = document.createElement("p")
+    // text.innerHTML = message
+    // text.classList.add("message", "mine", sessionStorage.getItem("color"))
+    // chat.appendChild(text)
+    // chat.scrollTop = chat.scrollHeight
 
     socket.emit("newMessage", messageInput.value.trim())
     messageForm.reset()
 
     if(document.querySelectorAll(".message").length > 0) {
-      document.querySelector(".alone-notification").style.display = "none"
+      document.querySelector(".empty-notification").style.display = "none"
     }
   })
   socket.on("newMessage", function(data) {
     // console.log(data.username, data.message)
     let text = document.createElement("p")
     text.innerHTML = data.message
-    text.classList.add("message", "not-mine")
+    text.classList.add("message", "not-mine", data.color)
     chat.appendChild(text)
     chat.scrollTop = chat.scrollHeight
   })

@@ -78,9 +78,9 @@ let users = []
 
 io.sockets.on('connection', socket => {
   socket.on('newUser', data => {
-    users.push({username: socket.request.session.username, id: socket.id})
+    users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color})
     users = removeNulls(users)
-    io.emit('newUser', [users, socket.id])
+    io.emit('newUser', [users, socket.id, socket.request.session.color])
   })
   socket.on('disconnect', () => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
@@ -89,7 +89,8 @@ io.sockets.on('connection', socket => {
   })
   socket.on('newMessage', (message) => {
     if(message.length > 0 && message.length <= 160) {
-      socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message})
+      // socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
+      io.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
     }
   })
 })

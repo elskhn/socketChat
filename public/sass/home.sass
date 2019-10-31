@@ -35,7 +35,7 @@
   padding: 20px
   > li
     padding: 15px 5px 15px 5px
-    background: rgb(44, 44, 46)
+    // background: rgb(44, 44, 46)
     border-radius: 10px
     overflow: hidden
     margin-bottom: 10px
@@ -60,6 +60,7 @@
   flex-direction: column
   width: 85%
   justify-content: space-between
+  z-index: 5
 
 .messages
   display: flex
@@ -146,7 +147,7 @@
   color: rgb(174, 174, 175)
 
 .message
-  background: #2c2c2e
+  // background: #2c2c2e
   border-radius: 10px
   padding: 15px
   margin: 5px 0 5px 0
@@ -168,3 +169,13 @@
   transition: 0.2s
   &:hover
     opacity: 1
+
+.purple
+  background: linear-gradient(to bottom right, rgb(58, 109, 249), rgb(109, 58, 212))
+  box-shadow: 0 5px 10px rgba(94, 73, 222, 0.3)
+
+.orange
+  background: linear-gradient(to bottom right, rgb(207, 161, 99), rgb(233, 116, 86))
+
+.green
+  background: linear-gradient(to bottom right, rgb(92, 202, 57), rgb(61, 138, 37))
