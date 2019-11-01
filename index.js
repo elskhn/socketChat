@@ -87,10 +87,10 @@ io.sockets.on('connection', socket => {
     users = removeNulls(users)
     io.emit("userLeft", [users, socket.id])
   })
-  socket.on('newMessage', (message) => {
-    if(message.length > 0 && message.length <= 160) {
+  socket.on('newMessage', (data) => {
+    if(data.message.length > 0 && data.message.length <= 160) {
       // socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
-      io.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
+      io.emit('newMessage', {username: socket.request.session.username, message: data.message, color: socket.request.session.color, id: data.id})
     }
   })
 })

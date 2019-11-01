@@ -1,7 +1,11 @@
 const socket = io.connect()
 
+function generateID() {
+  return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+}
+let userID = generateID()
 document.addEventListener("DOMContentLoaded", function(event) {
-  socket.emit('newUser')
+  socket.emit('newUser', userID)
   let userList = document.querySelector(".users-list"),
       chat = document.querySelector(".messages"),
       users = []
@@ -73,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // chat.appendChild(text)
     // chat.scrollTop = chat.scrollHeight
 
-    socket.emit("newMessage", messageInput.value.trim())
+    socket.emit("newMessage", {message: messageInput.value.trim(), id: userID})
     messageForm.reset()
 
     if(document.querySelectorAll(".message").length > 0) {
@@ -84,7 +88,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // console.log(data.username, data.message)
     let text = document.createElement("p")
     text.innerHTML = data.message
-    text.classList.add("message", "not-mine", data.color)
+    
+    if(data.id == userID) {
+      text.classList.add("message", "mine", data.color)
+    }
+    else {
+      text.classList.add("message", "not-mine", data.color)
+    }
     chat.appendChild(text)
     chat.scrollTop = chat.scrollHeight
   })
