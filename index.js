@@ -5,9 +5,14 @@ const express = require("express"),
 
 let app = express()
 const server = require("http").createServer(app)
-const io = require('socket.io').listen(server)
+const io = require('socket.io')({
+  pingTimeout: 20000,
+  pingInterval: 10000
+}).listen(server)
 const routes = require("./routes/main")
 
+// prevent clients from using http polling
+io.set('transports', ['websocket'])
 // two week cache period for static files
 let cacheTime = 14 * 24 * 60 * 60 * 1000
 // compress app responses (before sending to client)
@@ -65,7 +70,7 @@ for (let pages in routes){
 }
 
 io.use((socket, next) => {
-  userSession(socket.request, socket.request.res, next)
+  userSession(socket.request, socket.request.res || {}, next)
 })
 
 function removeNulls(array) {

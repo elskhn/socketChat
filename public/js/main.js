@@ -1,4 +1,5 @@
-const socket = io.connect()
+// use WebSockets exclusively (no XHR)
+const socket = io({transports: ['websocket'], upgrade: false})
 
 function generateID() {
   return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
