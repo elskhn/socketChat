@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     notification.innerHTML = `${users[users.length - 1].username} has <span>joined</span> the chat! <span class="emoji">👋</span>`
     notification.classList.add("notification")
     chat.appendChild(notification)
+    chat.scrollTop = chat.scrollHeight
   })
 
   socket.on("userLeft", function (data) {
@@ -38,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     notification.innerHTML = `${users[users.indexOf(users.find(user => user.id == data[1]))].username} has <span>left</span> the chat.`
     notification.classList.add("notification")
     chat.appendChild(notification)
-    
+    chat.scrollTop = chat.scrollHeight
+
     // remove user from the list
     users[users.indexOf(users.find(user => user.id == data[1]))] = null
     users = users.filter((element) => {

@@ -2,7 +2,6 @@
   display: flex
   flex-direction: column
   width: 100%
-  // margin: 40px 30px 150px 30px
 
 .chat
   display: flex
@@ -35,7 +34,6 @@
   padding: 20px
   > li
     padding: 15px 5px 15px 5px
-    // background: rgb(44, 44, 46)
     border-radius: 10px
     overflow: hidden
     margin-bottom: 10px
@@ -47,9 +45,6 @@
   overflow: auto
   > small
     color: rgb(94, 94, 95)
-    // > span
-    //   font-size: 18px
-    //   vertical-align: middle
 
 .emoji
   font-size: 18px
@@ -65,29 +60,23 @@
 .messages
   display: flex
   flex-direction: column
-  height: 94%
+  height: 90%
   margin-bottom: 10px
   overflow-x: hidden
   overflow-y: auto
   padding: 20px
   scrollbar-color: rgba(255,255,255,0.5) black
-  // scrollbar-width: thin
-  // > *
-  //   &:last-child
   &::after
-    // height: 50px
-    // content: ""
-    // display: block
     padding: 10px
     width: 100%
     content: ""
 
 .input-container
-  height: 6%
+  height: 10%
   padding: 0
   display: flex
   align-items: center
-  justify-content: center
+  justify-content: flex-end
   flex-direction: column  
   > form
     margin: 0
@@ -98,13 +87,10 @@
 .error
   color: #f95353
   font-weight: bold
-  padding: 10px 0 0 0
   margin: 0 0 5px 0
   display: none
   @media(max-width: 720px)
     font-size: 14px
-    margin: 10px 0 0 0
-    // width: 70%
     text-align: center
 
 .message-input
@@ -147,15 +133,12 @@
   color: rgb(174, 174, 175)
 
 .message
-  // background: #2c2c2e
   border-radius: 10px
   padding: 15px
   margin: 5px 0 5px 0
-  word-wrap: anywhere
-  // max-width: 20%
+  overflow-wrap: break-word
+  word-wrap: break-word
   max-width: 40%
-  // &:last-child
-  //   margin-bottom: 40px
 
 .mine
   align-self: flex-end
@@ -173,30 +156,34 @@
 
 .purple
   background: linear-gradient(to bottom right, rgb(58, 109, 249), rgb(109, 58, 212))
-  box-shadow: 0 5px 10px rgba(67, 100, 242, 0.3)
+  box-shadow: 0 5px 25px rgba(71, 96, 240, 0.35)
 
 .orange
   background: linear-gradient(to bottom right, #e1ae6c, #b93918)
-  box-shadow: 0 5px 10px rgba(223, 134, 91, 0.3)
+  box-shadow: 0 5px 30px rgba(194, 83, 43, 0.25)
 
 .green
   background: linear-gradient(to bottom right, #62b946, #2e7119)
-  box-shadow: 0 5px 10px rgba(85, 188, 52, 0.3)
+  box-shadow: 0 5px 28px rgba(64, 138, 40, 0.3)
 
 .blue
   background: linear-gradient(to bottom right, #28c4d5, #114bb9)
-  box-shadow: 0 5px 10px rgba(88, 201, 237, 0.31)
+  box-shadow: 0 5px 30px rgba(25, 120, 195, 0.3)
 
 .red
   background: linear-gradient(to bottom right, #d7756b, #b01d1d)
-  box-shadow: 0 5px 10px rgba(230, 62, 53, 0.3)
+  box-shadow: 0 5px 30px rgba(191, 63, 59, 0.3)
 
 .white
   background: linear-gradient(to bottom right, #fff, #b0b0b0)
-  box-shadow: 0 5px 10px rgba(210, 210, 210, 0.29)
+  box-shadow: 0 5px 30px rgba(184, 184, 184, 0.3)
   color: #393939
 
 .yellow
   background: linear-gradient(to bottom right, #dfcf49, #d4893a)
-  box-shadow: 0 5px 10px rgba(218, 178, 67, 0.3)
+  box-shadow: 0 5px 30px rgba(214, 149, 61, 0.3)
   color: #393939
+
+.pink
+  background: linear-gradient(to bottom right, #ee65cc, #ae2942)
+  box-shadow: 0 5px 30px rgba(222, 71, 175, 0.3)

@@ -17,7 +17,7 @@ router.get("/", (request, response) => {
                       description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan"})
 })
 
-let colors = ["purple", "orange", "green", "blue", "red", "white", "yellow"],
+let colors = ["purple", "pink", "orange", "green", "blue", "red", "white", "yellow"],
     counter = 0
 
 router.post("/", (request, response, next) => {
