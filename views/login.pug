@@ -18,18 +18,18 @@ block content
         p.error an error has occured
   .container-right
     //- form.room-form(method="post" action="/room/")
+    form.create-form
+      label Create a secret room #[span 🔒]
+      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
+      button(type="submit") Create room
+      p.error an error has occured
     form.room-form
-      label Join a private room #[span 🔒]
+      label Join a private room #[span 🙈]
       input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
       input(type="text" name="roomCode" placeholder="Room code")
       button(type="submit") Join room
       p.error an error has occured
     //- form.create-form(method="post" action="/room/")
-    form.create-form
-      label Create a secret room #[span 🙈]
-      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
-      button(type="submit") Create room
-      p.error an error has occured
   
 block scripts
   script(src="/lib/particles.min.js")
