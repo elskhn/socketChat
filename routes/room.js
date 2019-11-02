@@ -15,8 +15,11 @@ function generateRoomID() {
 
 router.get("/", (request, response) => {
   if(request.session.authenticated) {
-    if(request.session.roomID) {
+    if(request.session.roomID && request.session.roomID !== "global") {
       response.redirect(`/room/${request.session.roomID}`)  
+    }
+    else if(request.session.roomID && request.session.roomID !== "global") {
+      response.redirect(`/`)  
     }
     else {
       request.session.roomID = generateRoomID()
@@ -29,11 +32,19 @@ router.get("/", (request, response) => {
 })
 
 router.get("/:roomID", (request, response) => {
-  response.render("home", {
-                      username: request.session.username,
-                      title: `socketChat - ${request.params.roomID}`,
-                      author: "Abdullah F. Khan",
-                      description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan"})
+  if (request.params.roomID == "global") {
+    response.redirect("/")
+  }
+  else {
+    response.render("home", {
+                        username: request.session.username,
+                        room : `${request.params.roomID}`,
+                        title: `socketChat – ${request.params.roomID}`,
+                        author: "Abdullah F. Khan",
+                        description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan",
+                        aloneMessage: "Invite people with the code above <span class=\"emoji\">✅</span>"
+                      })
+  }
 })
 
 let colors = ["purple", "pink", "orange", "green", "blue", "red", "white", "yellow"],

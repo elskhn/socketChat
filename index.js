@@ -51,17 +51,6 @@ app.get('*', (request, response, next) => {
   }
 })
 
-app.get('/logout', function(request, response, next) {
-  request.session.authenticated = false
-  request.session.destroy(function(error) {
-    if(error) {
-      return next(error)
-    } else {
-      return response.redirect('/login')
-    }
-  })
-})
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 // create routes for all the pages
@@ -79,23 +68,35 @@ function removeNulls(array) {
   })
 }
 
-let users = []
 
+let users = []
 io.sockets.on('connection', socket => {
   socket.on('newUser', data => {
+    socket.join(socket.request.session.roomID)
     users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color})
     users = removeNulls(users)
-    io.emit('newUser', [users, socket.id, socket.request.session.color])
+    io.sockets.in(socket.request.session.roomID).emit('newUser', [users, socket.id, socket.request.session.color])
   })
   socket.on('disconnect', () => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
     users = removeNulls(users)
-    io.emit("userLeft", [users, socket.id])
+    io.sockets.in(socket.request.session.roomID).emit("userLeft", [users, socket.id])
   })
   socket.on('newMessage', (data) => {
     if(data.message.length > 0 && data.message.length <= 160) {
       // socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
-      io.emit('newMessage', {username: socket.request.session.username, message: data.message, color: socket.request.session.color, id: data.id})
+      io.sockets.in(socket.request.session.roomID).emit('newMessage', {username: socket.request.session.username, message: data.message, color: socket.request.session.color, id: data.id})
+    }
+  })
+})
+
+app.get('/logout', function(request, response, next) {
+  request.session.authenticated = false
+  request.session.destroy(function(error) {
+    if(error) {
+      return next(error)
+    } else {
+      return response.redirect('/login')
     }
   })
 })

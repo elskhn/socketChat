@@ -6,12 +6,12 @@ append head
 block content
   .inner-container
     .header
-      h1= title
+      h1 socketChat – #[span=room]
       a.logout(href="/logout" tabindex="-1") Log out
     .chat
       .users-container.card
         ul.users-list
-        small.alone-text You're all alone in here #[span.emoji 🙁]
+        small.alone-text !{aloneMessage}
       .chat-container
         .messages.card(tabindex="3")
           p.empty-notification.notification No new messages yet. Say something!

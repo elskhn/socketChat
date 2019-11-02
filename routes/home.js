@@ -10,15 +10,18 @@ function isValidUsername(username) {
 }
 
 router.get("/", (request, response) => {
-  if (request.session.roomID) {
-    response.redirect(`/room/${request.session.roomID}`)
+  if(request.session.roomID.toLowerCase() !== "global") {
+    response.redirect(`/room/${request.session.roomID}`)  
   }
   else {
     response.render("home", {
                         username: request.session.username,
-                        title: "socketChat – Global",
+                        room: "Global",
+                        title: `socketChat`,
                         author: "Abdullah F. Khan",
-                        description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan"})
+                        description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan",
+                        aloneMessage: "You're all alone in here <span class=\"emoji\">🙁</span>"
+                      })
   }
 })
 
@@ -32,6 +35,7 @@ router.post("/", (request, response, next) => {
     request.session.authenticated = true
     request.session.color = colors[counter]
     request.session.username = request.body.username
+    request.session.roomID = "global"
     counter++
     response.send({redirect: "/"})
   }
