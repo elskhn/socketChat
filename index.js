@@ -70,17 +70,20 @@ function removeNulls(array) {
 
 
 let users = []
+
 io.sockets.on('connection', socket => {
+  let room = socket.request.session.roomID
+
   socket.on('newUser', data => {
-    socket.join(socket.request.session.roomID)
-    users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color})
+    socket.join(room)
+    users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color, userRoom: room})
     users = removeNulls(users)
-    io.sockets.in(socket.request.session.roomID).emit('newUser', [users, socket.id, socket.request.session.color])
+    io.sockets.in(room).emit('newUser', [users.filter(user => user.userRoom == room)])
   })
   socket.on('disconnect', () => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
     users = removeNulls(users)
-    io.sockets.in(socket.request.session.roomID).emit("userLeft", [users, socket.id])
+    io.sockets.in(socket.request.session.roomID).emit("userLeft", [[users.find(user => user.userRoom == room)], socket.id])
   })
   socket.on('newMessage', (data) => {
     if(data.message.length > 0 && data.message.length <= 160) {

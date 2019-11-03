@@ -6,7 +6,7 @@ function generateID() {
 }
 let userID = generateID()
 document.addEventListener("DOMContentLoaded", function(event) {
-  socket.emit('newUser', userID)
+  socket.emit('newUser')
   let userList = document.querySelector(".users-list"),
       chat = document.querySelector(".messages"),
       users = []
@@ -67,18 +67,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if(message.length > 160) {
       error.style.display = "block"
       error.innerHTML = "Your message can't be longer than 160 characters. Sorry!"
-      return;
+      return
     }
     if(message.length == 0) {
       error.style.display = "block"
       error.innerHTML = "You gotta type something first <span class=\"emoji\">😛</span>"
-      return;
+      return
     }
-    // let text = document.createElement("p")
-    // text.innerHTML = message
-    // text.classList.add("message", "mine", sessionStorage.getItem("color"))
-    // chat.appendChild(text)
-    // chat.scrollTop = chat.scrollHeight
 
     socket.emit("newMessage", {message: messageInput.value.trim(), id: userID})
     messageForm.reset()
@@ -88,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
   })
   socket.on("newMessage", function(data) {
-    // console.log(data.username, data.message)
     let text = document.createElement("p")
     text.innerHTML = data.message
     
