@@ -16,10 +16,10 @@ function generateRoomID() {
 router.get("/", (request, response) => {
   if(request.session.authenticated) {
     if(request.session.roomID && request.session.roomID !== "global") {
-      response.redirect(`/room/${request.session.roomID}`)  
+      response.redirect(`/room/${request.session.roomID}`) 
     }
     else if(request.session.roomID && request.session.roomID !== "global") {
-      response.redirect(`/`)  
+      response.redirect(`/`)
     }
     else {
       request.session.roomID = generateRoomID()
@@ -62,6 +62,21 @@ router.post("/", (request, response, next) => {
   }
   else {
     response.status(400)
+  }
+})
+
+router.post("/:roomCode", (request, response, next) => {
+  if(isValidUsername(request.body.username) && (/^[a-zA-Z0-9]{3,5}$/).test(request.params.roomCode)) {
+    counter = counter >= colors.length ? 0 : counter
+    request.session.authenticated = true
+    request.session.color = colors[counter]
+    request.session.username = request.body.username
+    request.session.roomID = request.params.roomCode
+    counter++
+    response.send({redirect: `/room/${request.params.roomCode}`})
+  }
+  else {
+    response.status(400).json("invalid username or room code")
   }
 })
 

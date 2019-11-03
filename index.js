@@ -68,12 +68,11 @@ function removeNulls(array) {
   })
 }
 
-
 let users = []
 
 io.sockets.on('connection', socket => {
   let room = socket.request.session.roomID
-
+  
   socket.on('newUser', data => {
     socket.join(room)
     users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color, userRoom: room})
@@ -83,12 +82,11 @@ io.sockets.on('connection', socket => {
   socket.on('disconnect', () => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
     users = removeNulls(users)
-    io.sockets.in(socket.request.session.roomID).emit("userLeft", [[users.find(user => user.userRoom == room)], socket.id])
+    io.sockets.in(room).emit("userLeft", [[users.find(user => user.userRoom == room)], socket.id])
   })
   socket.on('newMessage', (data) => {
     if(data.message.length > 0 && data.message.length <= 160) {
-      // socket.broadcast.emit('newMessage', {username: socket.request.session.username, message: message, color: socket.request.session.color})
-      io.sockets.in(socket.request.session.roomID).emit('newMessage', {username: socket.request.session.username, message: data.message, color: socket.request.session.color, id: data.id})
+      io.sockets.in(room).emit('newMessage', {username: socket.request.session.username, message: data.message, color: socket.request.session.color, id: data.id})
     }
   })
 })

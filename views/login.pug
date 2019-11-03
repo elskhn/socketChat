@@ -26,7 +26,7 @@ block content
     form.room-form
       label Join a private room #[span 🙈]
       input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
-      input(type="text" name="roomCode" placeholder="Room code")
+      input(type="text" name="roomCode" placeholder="Room code" autocomplete="off" )
       button(type="submit") Join room
       p.error an error has occured
     //- form.create-form(method="post" action="/room/")
