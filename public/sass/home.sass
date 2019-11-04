@@ -1,7 +1,16 @@
+$break-mid: 1080px
+$break-small: 720px
+
+body
+  @media(max-width: $break-small)
+    overflow: hidden
+
 .inner-container
   display: flex
   flex-direction: column
   width: 100%
+  @media(max-width: $break-small)
+    overflow: hidden
 
 .chat
   display: flex
@@ -9,6 +18,12 @@
   padding: 0 30px 0 30px
   justify-content: space-between
   height: 75%
+  @media(max-width: $break-small)
+    flex-direction: column
+    justify-content: flex-end
+    height: 70%
+    padding: 0 10px
+    overflow: hidden
 
 .header
   display: flex
@@ -24,6 +39,16 @@
       color: #e1b849
   > a
     margin: 30px
+  @media(max-width: $break-small)
+    // position: fixed
+    // top:0 
+    // left: 0
+    > h1
+      margin: 15px
+      font-size: 20px
+    > a
+      margin: 15px
+      font-size: 16px
 
 .card
   background: #121213
@@ -40,6 +65,17 @@
     border-radius: 10px
     overflow: hidden
     margin-bottom: 10px
+  @media(max-width: $break-mid)
+    padding: 5px
+    > li
+      padding: 5px
+      font-size: 13px
+  @media(max-width: $break-small)
+    display: flex
+    flex-wrap: nowrap
+    > li
+      width: 85px
+      margin: 5px 10px 5px 10px
 
 .users-container
   text-align: center
@@ -48,10 +84,27 @@
   overflow: auto
   > small
     color: rgb(94, 94, 95)
+  @media(max-width: $break-mid)
+    padding: 10px 0 0 0
+  @media(max-width: $break-small)
+    width: 100%
+    height: 75px
+    margin: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    overflow-y: hidden
+    overflow-x: auto
+    padding: 0
+    > small
+      margin: 0 0 5px 0
 
 .emoji
   font-size: 18px
   vertical-align: middle
+  @media(max-width: $break-small)
+    font-size: 14px
 
 .chat-container
   display: flex
@@ -59,6 +112,14 @@
   width: 85%
   justify-content: space-between
   z-index: 5
+  @media(max-width: $break-small)
+    // justify-self: center
+    // justify-content: space-between
+    // justify-content: flex-end
+    width: 100%
+    margin: 10px 0 0 0
+    height: 100%
+    overflow: hidden
 
 .messages
   display: flex
@@ -73,6 +134,18 @@
     padding: 10px
     width: 100%
     content: ""
+  &:focus
+    outline: none
+  @media(max-width: $break-small)
+    background: rgba(0, 0, 0, 0)
+    padding: 0
+    overflow: auto
+    margin-bottom: 2vw
+    // padding-bottom: 10%
+    justify-content: flex-end
+    height: 90%
+    &::after
+      padding: 0
 
 .input-container
   height: 10%
@@ -86,6 +159,16 @@
     width: 75%
     display: flex
     justify-content: center
+  @media(max-width: $break-small)
+    justify-content: flex-start
+    justify-self: flex-end
+    // position: fixed
+    // bottom: 0
+    // left: 0
+    height: 10%
+    // margin-bottom: 15px
+    width: 100%
+    z-index: 10
 
 .error
   color: #f95353
@@ -109,6 +192,9 @@
     color: rgb(94, 94, 95)
   &:focus
     background: lighten(#121213, 5%)
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 7px 15px
 
 .message-send
   transition: 0.1s
@@ -121,6 +207,9 @@
     cursor: pointer
   &:active
     opacity: 0.7
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 5px 10px
 
 .notification
   text-align: center
@@ -131,9 +220,14 @@
   margin: 20px 0 5px 0
   > span
     font-weight: 600
+  @media(max-width: $break-small)
+    font-size: 12px
+    margin: 10px 0 5px 0
 
 .empty-notification
   color: rgb(174, 174, 175)
+  @media(max-width: $break-small)
+    margin: 0 0 5px 0
 
 .message
   border-radius: 10px
@@ -142,6 +236,10 @@
   overflow-wrap: break-word
   word-wrap: break-word
   max-width: 40%
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 10px
+    max-width: 60%
 
 .mine
   align-self: flex-end
