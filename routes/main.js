@@ -4,6 +4,6 @@ let home = require("./home"),
 
 module.exports = {
     "/": home,
-    "/room": room, 
+    "/room": room["router"], 
     "/login" : login
-};
+}

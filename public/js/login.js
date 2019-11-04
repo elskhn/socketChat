@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("API error, please try again later!")
+            throw new Error("Room doesn't exist")
           }
           return response.text()
         })

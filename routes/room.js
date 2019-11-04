@@ -4,6 +4,7 @@ const express = require("express"),
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
+let rooms = []
 
 function isValidUsername(username) {
   return username.trim() != "" && username.trim().length <= 12 && username.trim().indexOf(' ') == -1
@@ -15,10 +16,11 @@ function generateRoomID() {
 
 router.get("/", (request, response) => {
   if(request.session.authenticated) {
+    rooms = [...new Set(rooms.filter((room) => { room != null}))]
     if(request.session.roomID && request.session.roomID !== "global") {
       response.redirect(`/room/${request.session.roomID}`) 
     }
-    else if(request.session.roomID && request.session.roomID !== "global") {
+    else if(request.session.roomID && request.session.roomID == "global") {
       response.redirect(`/`)
     }
     else {
@@ -36,6 +38,7 @@ router.get("/:roomID", (request, response) => {
     response.redirect("/")
   }
   else {
+    rooms.push(request.params.roomID)
     response.render("home", {
                         username: request.session.username,
                         room : `${request.params.roomID}`,
@@ -45,6 +48,8 @@ router.get("/:roomID", (request, response) => {
                         aloneMessage: "Invite people with the code above <span class=\"emoji\">✅</span>"
                       })
   }
+  
+  console.log(rooms)
 })
 
 let colors = ["purple", "pink", "orange", "green", "blue", "red", "white", "yellow"],
@@ -63,10 +68,13 @@ router.post("/", (request, response, next) => {
   else {
     response.status(400)
   }
+  console.log(rooms)
+  rooms = [...new Set(rooms.filter((room) => { room != null}))]
+  
 })
 
 router.post("/:roomCode", (request, response, next) => {
-  if(isValidUsername(request.body.username) && (/^[a-zA-Z0-9]{3,5}$/).test(request.params.roomCode)) {
+  if(isValidUsername(request.body.username) && (/^[a-zA-Z0-9]{3,5}$/).test(request.params.roomCode) && rooms.indexOf(request.params.roomCode) != -1) {
     counter = counter >= colors.length ? 0 : counter
     request.session.authenticated = true
     request.session.color = colors[counter]
@@ -76,8 +84,9 @@ router.post("/:roomCode", (request, response, next) => {
     response.send({redirect: `/room/${request.params.roomCode}`})
   }
   else {
-    response.status(400).json("invalid username or room code")
+    response.status(400).json("invalid username/code or room doesn't exist")
   }
+  rooms = [...new Set(rooms.filter((room) => { room != null}))]
 })
 
-module.exports = router
+module.exports = {router, destroyRoom: (room) => { rooms[rooms.indexOf(room)] = null }}

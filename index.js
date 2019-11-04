@@ -43,10 +43,10 @@ function checkLoggedIn(request, response, next) {
 
 // redirect to login if not logged in yet
 app.get('*', (request, response, next) => {
-  if(request.url.indexOf('/login') == -1) {
+  if(request.path !== "/login") {
     checkLoggedIn(request, response, next)
   }
-  else{
+  else {
     next()
   }
 })
@@ -68,11 +68,11 @@ function removeNulls(array) {
   })
 }
 
-let users = []
+let users = [],
+    roomsRoutes = require("./routes/room")
 
 io.sockets.on('connection', socket => {
   let room = socket.request.session.roomID
-  
   socket.on('newUser', data => {
     socket.join(room)
     users.push({username: socket.request.session.username, id: socket.id, color: socket.request.session.color, userRoom: room})
@@ -83,6 +83,10 @@ io.sockets.on('connection', socket => {
     users[users.indexOf(users.find(user => user.id == socket.id))] = null
     users = removeNulls(users)
     io.sockets.in(room).emit("userLeft", [[users.find(user => user.userRoom == room)], socket.id])
+
+    if(!(room in io.sockets.adapter.rooms)) {
+      roomsRoutes.destroyRoom(room)
+    }
   })
   socket.on('newMessage', (data) => {
     if(data.message.length > 0 && data.message.length <= 160) {
