@@ -1,0 +1,25 @@
+extend layout
+
+append head
+  link(rel="stylesheet", href="/css/home.css")
+
+block content
+  .inner-container
+    .header
+      h1 socketChat – #[span=room]
+      a.logout(href="/logout" tabindex="-1") Log out
+    .chat
+      .users-container.card
+        ul.users-list
+        small.alone-text !{aloneMessage}
+      .chat-container
+        .messages.card(tabindex="3")
+          p.empty-notification.notification No new messages yet. Say something!
+        .input-container
+          p.error An error occured
+          form.messageForm
+            input.message-input(tabindex="1" autocomplete="off" type="text" placeholder="Type a message..." name="messageInput")
+            button.message-send(tabindex="2") Send
+block scripts
+  script(src="/lib/socket.io.js")
+  script(src="/js/main.js")

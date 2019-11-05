@@ -1,18 +1,33 @@
 {
-  "name": "socket-chat",
+  "name": "socketchat",
   "version": "1.0.0",
-  "description": "A chat app built using SocketIO and NodeJS",
-  "main": "server.js",
+  "description": "A simple, real-time messaging application",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdullah-k/socketChat.git"
   },
   "author": "Abdullah Khan",
-  "license": "GPL-3.0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abdullah-k/socketChat/issues"
+  },
+  "homepage": "https://github.com/abdullah-k/socketChat#readme",
   "dependencies": {
-    "compression": "^1.7.1",
-    "express": "^4.16.2",
-    "socket.io": "^2.0.4",
-    "g-crypt": "1.1.0"
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "g-crypt": "^1.1.0",
+    "pug": "^2.0.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^4.0.2"
   }
 }

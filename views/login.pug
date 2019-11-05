@@ -1,0 +1,36 @@
+extends layout
+append head
+  link(rel="stylesheet", href="/css/login.css")
+
+block content
+  .bg-left
+    #particles
+    .container-left
+      h1.title.title-size socketChat
+      h3.tagline.secondary-size
+        | #[strong Join] the global room, 
+        | #[strong create] your own room, 
+        | or join one using a code!
+      //- form.login-form
+      form.login-form(method="post" action="/")
+        input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
+        button(type="submit") Join everyone!
+        p.error an error has occured
+  .container-right
+    //- form.room-form(method="post" action="/room/")
+    form.create-form
+      label Create a secret room #[span 🔒]
+      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
+      button(type="submit") Create room
+      p.error an error has occured
+    form.room-form
+      label Join a private room #[span 🙈]
+      input.usernameInput(type="text" name="username" placeholder="Username"  autocomplete="off" )
+      input(type="text" name="roomCode" placeholder="Room code" autocomplete="off" )
+      button(type="submit") Join room
+      p.error an error has occured
+    //- form.create-form(method="post" action="/room/")
+  
+block scripts
+  script(src="/lib/particles.min.js")
+  script(src="/js/login.js")

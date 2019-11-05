@@ -1,0 +1,272 @@
+$break-mid: 1080px
+$break-small: 720px
+
+
+.inner-container
+  display: flex
+  flex-direction: column
+  width: 100%
+
+.chat
+  display: flex
+  flex-direction: row
+  padding: 0 30px 0 30px
+  justify-content: space-between
+  height: 75%
+  @media(max-width: $break-small)
+    flex-direction: column
+    justify-content: flex-end
+    height: 90%
+    padding: 0 10px
+    overflow: hidden
+
+.header
+  display: flex
+  width: 100%
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  > h1
+    margin: 30px
+    > span
+      user-select: all
+      color: #e1b849
+  > a
+    margin: 30px
+  @media(max-width: $break-small)
+    > h1
+      margin: 15px
+      font-size: 20px
+    > a
+      margin: 15px
+      font-size: 16px
+
+.card
+  background: #121213
+  padding: 10px
+  border-radius: 15px
+  overflow: hidden
+
+.users-list
+  list-style: none
+  margin: 0
+  padding: 20px
+  > li
+    padding: 15px 5px 15px 5px
+    border-radius: 10px
+    overflow: hidden
+    margin-bottom: 10px
+  @media(max-width: $break-mid)
+    padding: 5px
+    > li
+      padding: 5px
+      font-size: 13px
+  @media(max-width: $break-small)
+    display: flex
+    flex-wrap: nowrap
+    > li
+      width: 85px
+      margin: 5px 10px 5px 10px
+
+.users-container
+  text-align: center
+  width: 15%
+  margin-right: 20px
+  overflow: auto
+  > small
+    color: rgb(94, 94, 95)
+  @media(max-width: $break-mid)
+    padding: 10px 0 0 0
+  @media(max-width: $break-small)
+    width: 100%
+    height: 75px
+    margin: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    overflow-y: hidden
+    overflow-x: auto
+    padding: 0
+    > small
+      margin: 0 0 5px 0
+
+.emoji
+  font-size: 18px
+  vertical-align: middle
+  @media(max-width: $break-small)
+    font-size: 14px
+
+.chat-container
+  display: flex
+  flex-direction: column
+  width: 85%
+  justify-content: space-between
+  z-index: 5
+  @media(max-width: $break-small)
+    width: 100%
+    margin: 10px 0 0 0
+    height: 100%
+    overflow: hidden
+
+.messages
+  display: flex
+  flex-direction: column
+  height: 90%
+  margin-bottom: 10px
+  overflow-x: hidden
+  overflow-y: auto
+  padding: 20px
+  scrollbar-color: rgba(255,255,255,0.5) black
+  &::after
+    padding: 10px
+    width: 100%
+    content: ""
+  &:focus
+    outline: none
+  @media(max-width: $break-small)
+    background: rgba(0, 0, 0, 0)
+    padding: 10px
+    margin: 10px 0
+    height: 65%
+    &:after
+      padding: 5px
+
+.input-container
+  height: 10%
+  padding: 0
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  flex-direction: column  
+  > form
+    margin: 0
+    width: 75%
+    display: flex
+    justify-content: center
+  @media(max-width: $break-small)
+    justify-content: flex-start
+    position: fixed
+    bottom: 0
+    width: 100%
+    z-index: 10
+
+.error
+  color: #f95353
+  font-weight: bold
+  margin: 0 0 5px 0
+  display: none
+  @media(max-width: 720px)
+    font-size: 14px
+    text-align: center
+
+.message-input
+  width: 60%
+  padding: 12px 25px 12px 20px
+  margin: 0 10px 0 10px
+  color: white
+  background: #121213
+  border: none
+  border-radius: 10px
+  transition: 0.1
+  &::placeholder
+    color: rgb(94, 94, 95)
+  &:focus
+    background: lighten(#121213, 5%)
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 7px 15px
+
+.message-send
+  transition: 0.1s
+  background: linear-gradient(to right bottom, #2762C5, #282275)
+  color: white
+  border: none
+  border-radius: 10px
+  padding: 5px 20px 5px 20px
+  &:hover
+    cursor: pointer
+  &:active
+    opacity: 0.7
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 5px 10px
+
+.notification
+  text-align: center
+  align-self: center
+  justify-self: center
+  color: rgb(94, 94, 95)
+  font-size: 14px
+  margin: 20px 0 5px 0
+  > span
+    font-weight: 600
+  @media(max-width: $break-small)
+    font-size: 12px
+    margin: 10px 0 5px 0
+
+.empty-notification
+  color: rgb(174, 174, 175)
+  @media(max-width: $break-small)
+    margin: 0 0 5px 0
+
+.message
+  border-radius: 10px
+  padding: 15px
+  margin: 5px 0 5px 0
+  overflow-wrap: break-word
+  word-wrap: break-word
+  max-width: 40%
+  @media(max-width: $break-small)
+    font-size: 14px
+    padding: 10px
+    max-width: 60%
+
+.mine
+  align-self: flex-end
+
+.not-mine
+  align-self: flex-start
+
+.logout
+  color: rgb(255, 69, 58)
+  opacity: 0.7
+  text-decoration: none
+  transition: 0.2s
+  &:hover
+    opacity: 1
+
+.purple
+  background: linear-gradient(to bottom right, rgb(58, 109, 249), rgb(109, 58, 212))
+  box-shadow: 0 5px 25px rgba(71, 96, 240, 0.35)
+
+.orange
+  background: linear-gradient(to bottom right, #e1ae6c, #b93918)
+  box-shadow: 0 5px 30px rgba(194, 83, 43, 0.25)
+
+.green
+  background: linear-gradient(to bottom right, #62b946, #2e7119)
+  box-shadow: 0 5px 28px rgba(64, 138, 40, 0.3)
+
+.blue
+  background: linear-gradient(to bottom right, #28c4d5, #114bb9)
+  box-shadow: 0 5px 30px rgba(25, 120, 195, 0.3)
+
+.red
+  background: linear-gradient(to bottom right, #d7756b, #b01d1d)
+  box-shadow: 0 5px 30px rgba(191, 63, 59, 0.3)
+
+.white
+  background: linear-gradient(to bottom right, #fff, #b0b0b0)
+  box-shadow: 0 5px 30px rgba(184, 184, 184, 0.3)
+  color: #393939
+
+.yellow
+  background: linear-gradient(to bottom right, #dfcf49, #d4893a)
+  box-shadow: 0 5px 30px rgba(214, 149, 61, 0.3)
+  color: #393939
+
+.pink
+  background: linear-gradient(to bottom right, #ee65cc, #ae2942)
+  box-shadow: 0 5px 30px rgba(222, 71, 175, 0.3)
