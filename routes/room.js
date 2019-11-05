@@ -48,8 +48,6 @@ router.get("/:roomID", (request, response) => {
                         aloneMessage: "Invite people with the code above <span class=\"emoji\">✅</span>"
                       })
   }
-  
-  console.log(rooms)
 })
 
 let colors = ["purple", "pink", "orange", "green", "blue", "red", "white", "yellow"],
@@ -68,9 +66,8 @@ router.post("/", (request, response, next) => {
   else {
     response.status(400)
   }
-  console.log(rooms)
+
   rooms = [...new Set(rooms.filter((room) => { room != null}))]
-  
 })
 
 router.post("/:roomCode", (request, response, next) => {
