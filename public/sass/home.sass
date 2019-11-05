@@ -21,7 +21,7 @@ body
   @media(max-width: $break-small)
     flex-direction: column
     justify-content: flex-end
-    height: 70%
+    height: 90%
     padding: 0 10px
     overflow: hidden
 
@@ -40,9 +40,6 @@ body
   > a
     margin: 30px
   @media(max-width: $break-small)
-    // position: fixed
-    // top:0 
-    // left: 0
     > h1
       margin: 15px
       font-size: 20px
@@ -113,9 +110,6 @@ body
   justify-content: space-between
   z-index: 5
   @media(max-width: $break-small)
-    // justify-self: center
-    // justify-content: space-between
-    // justify-content: flex-end
     width: 100%
     margin: 10px 0 0 0
     height: 100%
@@ -138,14 +132,11 @@ body
     outline: none
   @media(max-width: $break-small)
     background: rgba(0, 0, 0, 0)
-    padding: 0
-    overflow: auto
-    margin-bottom: 2vw
-    // padding-bottom: 10%
-    justify-content: flex-end
-    height: 90%
-    &::after
-      padding: 0
+    padding: 10px
+    margin: 10px 0
+    height: 80%
+    &:after
+      padding: 5px
 
 .input-container
   height: 10%
@@ -161,12 +152,8 @@ body
     justify-content: center
   @media(max-width: $break-small)
     justify-content: flex-start
-    justify-self: flex-end
-    // position: fixed
-    // bottom: 0
-    // left: 0
-    height: 10%
-    // margin-bottom: 15px
+    position: fixed
+    bottom: 0
     width: 100%
     z-index: 10
 
