@@ -10,6 +10,6 @@ router.get("/", (request, response) => {
                       author: "Abdullah F. Khan",
                       description: "Welcome to socketChat, a secure messaging application created by Abdullah Khan"})
   }
-});
+})
 
-module.exports = router;
+module.exports = router
