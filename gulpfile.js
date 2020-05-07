@@ -15,7 +15,8 @@ let watch = () => {
   gulp.watch('public/sass/*.sass', gulp.series(styles));
 };
 
+let runTask = process.argv.includes("--dev") ? gulp.series(styles, gulp.parallel(watch)) : styles
 // default gulp task - styles task runs first to generate CSS. Then, the watch task is run
-gulp.task('default', gulp.series(styles, gulp.parallel(watch), (done) => {
+gulp.task('default', runTask, (done) => {
     done();
-}));
+});
