@@ -4,7 +4,8 @@
   "description": "A simple, real-time messaging application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node ./node_modules/gulp/bin/gulp",
+    "start": "SESSIONSECRET=$SOCKETCHATSECRET node index.js"
   },
   "repository": {
     "type": "git",
