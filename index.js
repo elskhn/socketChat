@@ -106,6 +106,6 @@ app.get('/logout', function(request, response, next) {
   })
 })
 
-server.listen(4000, () => {
+server.listen(process.env.PORT || 4000, () => {
   console.log("server is live on port 4000")
 })
