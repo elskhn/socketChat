@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if(users.length > 1) {
       document.querySelector(".alone-text").style.display = "none"
     }
-    userList.innerHTML = ""
+    userList.innerText = ""
     sessionStorage.setItem("color", data[2])
     users.forEach((user, index) => {
       let li = document.createElement("li")
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   })
   socket.on("newMessage", function(data) {
     let text = document.createElement("p")
-    text.innerHTML = data.message
+    text.innerText = data.message
     
     if(data.id == userID) {
       text.classList.add("message", "mine", data.color)
