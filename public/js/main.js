@@ -25,18 +25,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
     
     // send message to others about who connected
-    let notification = document.createElement("p")
-    notification.innerHTML = `${users[users.length - 1].username} has <span>joined</span> the chat! <span class="emoji">👋</span>`
+		let notification = document.createElement("p")
+		let newUsername = users[users.length - 1].username
+		notification.innerHTML = `<span class="notif-username"></span> has <span>joined</span> the chat! <span class="emoji">👋</span>`
+		notification.getElementsByClassName("notif-username")[0].textContent = newUsername
     notification.classList.add("notification")
     chat.appendChild(notification)
     chat.scrollTop = chat.scrollHeight
   })
 
   socket.on("userLeft", function (data) {
-    userList.innerHTML = ""
+    userList.innerText = ""
     // send message to others about who disconnected
-    let notification = document.createElement("p")
-    notification.innerHTML = `${users[users.indexOf(users.find(user => user.id == data[1]))].username} has <span>left</span> the chat.`
+		let notification = document.createElement("p")
+		let leavingUsername = users[users.indexOf(users.find(user => user.id == data[1]))].username;
+		notification.innerHTML = `<span class="notif-username"></span> has <span>left</span> the chat`;
+		notification.getElementsByClassName("notif-username")[0].textContent = leavingUsername;
     notification.classList.add("notification")
     chat.appendChild(notification)
     chat.scrollTop = chat.scrollHeight
@@ -66,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let message = messageInput.value.trim()
     if(message.length > 160) {
       error.style.display = "block"
-      error.innerHTML = "Your message can't be longer than 160 characters. Sorry!"
+      error.innerHTML = "Your message can't be longer than 160 characters"
       return
     }
     if(message.length == 0) {
