@@ -22,7 +22,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
